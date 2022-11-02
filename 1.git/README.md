@@ -44,7 +44,7 @@ alias ll='ls -al'           # 用于输出当前目录所有文件及基本信�
 source .bashrc              # 使文件.bashrc立即生效
 ```
 
-## 2.基本操作指令
+## 2. 基本操作指令
 ```aidl
 # 初始化git仓库
 git init
