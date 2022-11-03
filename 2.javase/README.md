@@ -377,10 +377,258 @@ int[] money = new int[]{100, 200, 300, 400};
 ```
 
 ## 6. 方法
+### 6.1 定义
+```aidl
+# 定义格式：
+修饰符 返回值类型 方法名(形参列表){
+    方法体代码（需要执行的功能代码）;
+    return 返回值;
+}
+# 调用格式：
+方法名(...)
 
+例子1：
+public static int add(int a, int b){
+    int c = a + b;
+    return c;
+}
+
+例子2：
+public static void print(){
+    System.out.println("Hello World!");
+    System.out.println("Hello World!");
+    System.out.println("Hello World!");
+}
+```
+
+### 6.2 案例
+```aidl
+# 案例1：定义一个方法，返回计算1-n的和。
+public static int sum(int n){
+    int sum = 0;
+    for (int i=1; i<=n; i++){
+        sum += i;
+    }
+    System.out.println("sum="+sum);
+}
+
+# 案例2：判断整数是奇数还是偶数。
+public static void fun(int n){
+    if (n%2 == 0){
+        System.out.println(n + "是偶数");
+    }else{
+        System.out.println(n + "是奇数");
+    }
+}
+
+# 案例3：数组求最大值。
+int[] a = new int[]{10, 20, 30};
+public static int maxArr(int[] a){
+    max = a[0];
+    for (int i=1; i<a.length; i++){
+        if (max < a[i]){
+            max = a[i];
+        }
+    }
+}
+```
+
+### 6.3 参数传递
+```aidl
+# 基本数据类型参数传递
+传递实参给形参的时候，传递的是实参中的值，也就是值传递。
+public static void main(String[] args){
+    int a = 10;
+    change(a);
+    System.out.println(a);
+}
+public static void change(int a){
+    System.out.println(a);
+    a = 20;
+    System.out.println(a);
+}
+// 结果为：10 20 10
+
+# 引用数据类型参数传递
+传递实参给形参的时候，传递的是实参保存的地址值。
+public static void main(String[] args){
+    int[] arr = new int[]{10,20,30};
+    change(arr);
+    System.out.println(arr[1]);
+}
+public static void change(int[] arr){
+    System.out.println(arr[1]);
+    arr[1] = 222;
+    System.out.println(arr[1]);
+}
+// 结果为：20 222 222
+```
+
+### 6.4 方法重载
+```aidl
+# 定义：同一个类中，出现多个方法名称相同，但是形参列表不同，这些方法就是重载方法。
+public class Method{
+    public static void main(String[] args){
+        fire();
+        fire("美国");
+        fire("美国", 1000);
+    }
+    public static void fire(){
+        System.out.println("发射！");
+    }
+    public static void fire(String location){
+        System.out.println("向" + location + "发射！");
+    }
+    public static void fire(String location, int number){
+        System.out.println("向" + location + "发射" + number + "枚炮弹！");
+    }
+}
+```
+
+### 6.5 单独使用return关键词
+```aidl
+public class Test{
+    public static void main(String[] args){
+        chu(1, 10);
+    }
+    public static void chu(int a, int b){
+        if (b==0){
+            System.out.println("输入有误！");
+            return；
+        }else{
+            System.out.println("结果是：" + a/b);
+        }
+    }
+}
+```
 
 ## 7. 对象
+### 7.1 创建
+```aidl
+# 创建类
+public class 类名{
+    1. 成员变量（代表属性，一般是名词）
+    2. 成员方法（代表行为，一般是动词）
+    3. 构造器
+    4. 代码块
+    5. 内部类
+}
 
+例如：
+public class Car{
+    // 属性（成员变量）
+    String name;
+    double price;
+    // 行为（方法）
+    public void start(){}
+    public void run(){}
+} 
+
+# 创建类的对象
+类名 对象名 = new 类名();
+Car c = new Car();
+
+# 注意事项：
+1. 类名大写；
+2. 一个Java文件中可以定义多个class（类），但是只能有一个是public。
+```
+
+
+### 7.2 案例
+代码详见：[Object](code/src/Object/Shopping.java)
+
+### 7.3 构造器
+```aidl
+# 作用：定义在类中，可以初始化一个类的对象，并返回对象的地址。
+# 格式：
+修饰符 类名(形参列表){
+    ...
+}
+public class Car{
+    // 无参构造器
+    public Car(){}
+    // 有参构造器
+    public Car(String name, double price){}
+}
+
+# 调用：
+类 变量名称 = new 构造器;
+car c1 = new car();
+car c2 = new car("奔驰", 39.8); 
+
+# 注意：
+1. 任何类定义出来，默认自带了无参数构造器
+```
+代码详见：[CarTest](code/src/Object/CarTest.java)
+
+### 7.4 this
+```aidl
+# 作用：可以用于指定访问当前对象的成员变量、成员方法。
+public class Car {
+    String name;
+    double price;
+    public Car(){
+        System.out.println("无参构造器被调用。");
+    }
+    public Car(String name, double price){
+        System.out.println("有参数构造器被调用。");
+        this.name = name;
+        this.price = price;
+    }
+}
+```
+代码详见：[Car](code/src/Object/Car.java)
+
+### 7.5 封装
+```aidl
+# 原则：对象代表什么，就得封装对应的数据，并提供数据对应的行为。
+public class Age {
+    private int age;
+    public int getAge(){
+        return age;
+    }
+    public void setAge(int age){
+        if (age <= 200 && age >= 0){
+            this.age = age;
+        }else {
+            System.out.println("年龄有误！");
+        }
+    }
+}
+
+public class AgeTest {
+    public static void main(String[] args) {
+        Age a = new Age();
+        a.setAge(30);
+        int age = a.getAge();
+        System.out.println("年龄是：" + age);
+    }
+}
+```
+代码详见：[age](code/src/Object/AgeTest.java)
+
+### 7.6 JavaBean
+```aidl
+# 书写要求：
+1. 成员变量使用private修饰；
+2. 提供成员变量对应的setXxx() / getXxx()方法；
+3. 必须提供一个无参构造器，有参构造器可写可不写。
+```
+代码详见：[User](code/src/Object/UserTest.java)
+
+### 7.7 成员变量和局部变量
+|  区别  |        成员变量        |         局部变量         |
+|:----:|:------------------:|:--------------------:|
+| 类中位置 |       类中，方法外       |        常见于方法中        |
+| 默认值  |        有默认值        |      没有默认值，需要赋值      |
+| 生命周期 | 随着对象的创建而存在，对象消失则消失 | 随着方法的调用而存在，方法运行结束则消失 |
+| 作用域  |        全对象内        |        所属方法内         |
+
+### 7.8 案例
+```aidl
+# 案例：模仿电影信息展示。
+```
+代码详见：[Movie](code/src/Object/MovieTest.java)
 
 ## 8. String
 
