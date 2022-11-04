@@ -631,9 +631,52 @@ public class AgeTest {
 代码详见：[Movie](code/src/Object/MovieTest.java)
 
 ## 8. String
+### 8.1 创建
+```aidl
+# 概述：java.lang.String类代表字符串，String类定义的对象用于指向字符串对象，然后操作该字符串。
+# 特点：String类创建之后不能被修改。
+
+String address = "深圳";
+address += "大学";
+address += "计算机与软件学院";
+System.out.println(address);    // 深圳大学计算机与软件学院
+
+解释：创建的String"深圳"、"大学"、"计算机与软件学院"都无法改变，address改变的原因是
+每次连接都指向了新的对象，比如连接"大学"之后，address就指向了对象"深圳大学"的地址，
+之前的String对象"深圳"和"大学"都没有改变。
+
+# 构造方法：
+方法一：String address = "深圳";
+方法二：使用String类的构造器创建对象。
+```
+|       构造器        |        说明         |
+|:----------------:|:-----------------:|
+| public String()  |   空白字符串对象（几乎不用）   |
+| public String(String original) |   传入字符串内容（几乎不用）   |
+| public String(char[] chs) | 根据字符数组的内容，创建字符串对象 |
+| public String(byte[] chs) | 根据字节数组的内容，创建字符串对象 |
+```aidl
+# 以""方式给出的字符串对象，在字符串常量池中存储。
+```
 
 
-## 9. 集合
+### 8.2 常见面试题
+```aidl
+
+```
+
+### 8.3 String常见API
+```aidl
+
+```
+
+### 8.4 案例
+```aidl
+
+
+```
+
+## 9. 集合: ArryList
 
 
 ## 10. static
