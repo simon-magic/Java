@@ -656,28 +656,314 @@ System.out.println(address);    // 深圳大学计算机与软件学院
 | public String(char[] chs) | 根据字符数组的内容，创建字符串对象 |
 | public String(byte[] chs) | 根据字节数组的内容，创建字符串对象 |
 ```aidl
-# 以""方式给出的字符串对象，在字符串常量池中存储。
+# 以""方式给出的字符串对象，在字符串常量池中存储，相同的内容只会存储一份。
+# 通过构造器new对象，则每new一次就会产生一个新对象，放在堆内存中。
+public class StringConstruct {
+    public static void main(String[] args) {
+        String s1 = "abc";
+        String s2 = "abc";
+        System.out.println(s1 == s2);   // true
+
+        char[] chars1 = new char[]{'a', 'b', 'c'};
+        String s3 = new String(chars1);
+        String s4 = new String(chars1);
+        System.out.println(s3 == s4);   // false
+
+    }
+}
 ```
+详见代码：[StringConstruct](code/src/String/StringConstruct.java)
 
 
 ### 8.2 常见面试题
 ```aidl
+# 代码运行结果：
+public class InterviewQuestion {
+    public static void main(String[] args) {
+        String s1 = new String("abc");  // 此行创建了两个对象，一个放在字符串常量池中，一个放在堆内存中。
+        String s2 = "abc";  // 此行没有创建对象，如果没有上一行，则创建一个对象放在字符串常量池中。
+        System.out.println(s1 == s2);   // false
+        System.out.println("----------------------------");
+        
+        String s3 = "abc";
+        String s4 = "ab";
+        String s5 = s4 + "c";
+        System.out.println(s3 == s5);   // false
+        System.out.println("----------------------------");
 
+        String s6 = "a" + "b" + "c";
+        System.out.println(s3 == s6);   // true. 原因是：java存在编译优化机制，程序在编译时："a" + "b" + "c"会直接转成"abc".
+    }
+}
 ```
+详见代码：[InterviewQuestion](code/src/String/InterviewQuestion.java)
 
 ### 8.3 String常见API
 ```aidl
+# 案例1：字符串的内容比较，推荐使用String类提供的“equals”方法。
+## equals: 只关心字符内容是否一致；
+## equalsIgnoreCase: 忽略大小写。
 
+## 错误示范：
+// 1. 正确登录名和密码
+String okName = "simon";
+String okPassword = "123456";
+// 2. 用户输入登录名和密码
+Scanner sc = new Scanner(System.in);
+System.out.println("登录名称：");
+String name = sc.next();
+System.out.println("登陆密码：");
+String password = sc.next();
+// 3. 判断用户登录名称密码是否和正确登录名密码相等
+// 此种写法错误：字符串内容比较不适合用“==”比较。
+if (okName == name && okPassword == password){
+    System.out.println("登陆成功！");
+}else {
+    System.out.println("登入失败！");
+}
+
+## 正确示范：
+if (okName.equals(name) && okPassword.equals(password)){
+    System.out.println("登陆成功！");
+}else {
+    System.out.println("登入失败！");
+}
+
+// 4. 验证码：忽略大小写
+String sysCode = "aBc1";
+System.out.println("验证码：");
+String code1 = sc.next();
+System.out.println(sysCode.equalsIgnoreCase(code1));
+```
+代码详见：[StringEquals](code/src/String/StringEquals.java)
+
+```aidl
+案例2：其他例子
+// 1. length: 字符串长度
+System.out.println("--------------------");
+String name = "我爱你中国";
+System.out.println(name.length());  // 5
+
+// 2. charAt(int index): 获取某个索引位置的字符
+System.out.println("--------------------");
+System.out.println(name.charAt(1)); // 爱
+System.out.println("--------------------");
+// 遍历字符串中每个字符
+for (int i = 0; i < name.length(); i++) {
+    System.out.println(name.charAt(i));
+}
+
+// 3. toCharArray: 把字符串转换为字符数组
+System.out.println("--------------------");
+char[] chars = name.toCharArray();
+System.out.println(chars);
+for (int i = 0; i < chars.length; i++) {
+    System.out.println(chars[i]);
+}
+
+// 4. substring(int beginIndex, end endIndex): 根据索引进行截取，左闭右开
+//    substring(int beginIndex): 从索引处一直截取到末尾
+System.out.println("--------------------");
+String name1 = name.substring(0, 3);
+System.out.println(name1);  // 我爱你
+String name2 = name.substring(3);
+System.out.println(name2);  // 中国
+
+// 5. replace(charSequence target, sharSequence replacement): 使用新值代替旧值，得到新的字符串
+System.out.println("--------------------");
+String name3 = name.replace("中国", "祖国");
+System.out.println(name3);  // 我爱你祖国
+
+// 6. contains(charSequence s): 是否包含某字符
+System.out.println("--------------------");
+System.out.println(name.contains("中国"));    // true
+
+// 7. startsWith(String prefix, int toffset): 判断是否是以某个字符（串）开始的，第二个参数是从哪个索引开始
+System.out.println("--------------------");
+System.out.println(name.startsWith("我爱你")); // true
+System.out.println(name.startsWith("我爱你", 1));  // false
+
+// 8. split(string regex): 根据规则切割字符串，得到字符串数组返回
+System.out.println("--------------------");
+String name4 = "张三，李四，王五，赵六";
+String[] name5 = name4.split("，");
+for (int i = 0; i < name5.length; i++) {
+    System.out.println(name5[i]);
+}
 ```
 
 ### 8.4 案例
 ```aidl
+# 开发验证码功能
+public class StringSys {
+    public static void main(String[] args) {
+        // 1. 定义可能出现的字符
+        String data = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        
+        // 2. 循环五次，每次随机生成一个索引，提取对应字符连接起来
+        String code = "";
+        Random r = new Random();
+        for (int i = 0; i < 5; i++) {
+            // 随机一个索引
+            int index = r.nextInt(data.length());
+            char c = data.charAt(index);
+            code += c;
 
+        }
 
+        // 3. 输出字符串
+        System.out.println(code);
+    }
+}
+```
+代码详见：[StringSys](code/src/String/StringSys.java)
+```aidl
+# 模拟用户登录功能，最多只给三次机会。
+public class StringUser {
+    public static void main(String[] args) {
+        // 1. 定义正确的用户名和密码
+        String okLoginName = "admin";
+        String okPassword = "123456";
+
+        // 2. 定义一个循环，循环3次
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < 3; i++) {
+            System.out.println("请输入用户名：");
+            String name = sc.next();
+            System.out.println("请输入密码：");
+            String password = sc.next();
+
+            // 3. 判断是否登录成功
+            if (okLoginName.equals(name) && okPassword.equals(password)){
+                System.out.println("登陆成功！");
+                break;
+            }else{
+                System.out.println("用户名或者密码错误，还剩" + (2-i) + "次机会！");
+            }
+        }
+    }
+}
+```
+代码详见：[StringUser](code/src/String/StringUser.java)
+```aidl
+# 电话号码屏蔽：中间四位变成*
+public class StringPhoneNumber {
+    public static void main(String[] args) {
+        // 1. 输入一个手机号码
+        Scanner sc = new Scanner(System.in);
+        System.out.println("输入手机号码：");
+        String tel = sc.next();
+
+        // 2. 截取手机号码前三位和后四位
+        String before = tel.substring(0, 3);
+        String after = tel.substring(7);
+        String s = before + "****" + after;
+        System.out.println(s);
+    }
+}
+```
+代码详见：[StringPhoneNumber](code/src/String/StringPhoneNumber.java)
+
+## 9. 集合
+### 9.1 概述
+```aidl
+# 数组定义之后，类型确定，长度固定。
+# 集合的大小不固定，启动后可以动态变化，类型也可以选择不固定。
+# 集合非常适合做元素不确定，且要进行增删操作的场景。
+# ArryList是集合的一种，支持索引。
 ```
 
-## 9. 集合: ArryList
+### 9.2 使用方法
+```aidl
+# 添加数据 add(int index, E element);   add(E element);
+public class ArrayListConstruct {
+    public static void main(String[] args) {
+        // 1. 创建ArrayList
+        ArrayList list = new ArrayList();
 
+        // 2. 添加数据
+        list.add("Java");
+        list.add(23);
+        list.add(10.2);
+        list.add(false);
+
+        // 3. 打印查看
+        System.out.println(list);   // [Java, 23, 10.2, false]
+    }
+}
+```
+代码详见：[ArrayListConstruct](code/src/ArrayList/ArrayListConstruct.java)
+
+```aidl
+# 泛型：ArrayList<E>，集合只能操作某种数据类型。
+ArrayList<String>: 只能操作字符串类型的数据；
+ArrayList<Interger>: 只能操作整数类型的数据。
+
+public class ArrayListGeneric {
+    public static void main(String[] args) {
+        ArrayList<String> a1 = new ArrayList<>();
+        a1.add("Java");
+        a1.add("Mysql");
+        a1.add("Git");
+
+        ArrayList<Integer> a2 = new ArrayList<>();
+        a2.add(23);
+        a2.add(100);
+    }
+}
+```
+代码详见：[ArrayListGeneric](code/src/ArrayList/ArrayListGeneric.java)
+
+```aidl
+# 常用API
+public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Java");
+        list.add("Mysql");
+        list.add("HTML");
+        list.add("CSS");
+        list.add("Javascript");
+
+        // 1. public E get(int index): 获取指定索引除的元素
+        System.out.println("--------------------");
+        String e = list.get(1);
+        System.out.println(e);  // "Mysql"
+
+        // 2. public int size(): 获取集合中元素的个数
+        System.out.println("--------------------");
+        System.out.println(list.size());    // 5
+
+        // 3. 集合的遍历
+        System.out.println("--------------------");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+
+        // 4. public E remove(int index): 删除指定索引处的元素，返回被删的元素
+        System.out.println("--------------------");
+        System.out.println("被删之前的ArrayList：" + list);   // [Java, Mysql, HTML, CSS, Javascript]
+        System.out.println("被删的元素是：" + list.remove(2)); // "HTML"
+        System.out.println("被删之后的ArrayList：" + list);   // [Java, Mysql, CSS, Javascript]
+
+        // 5. public boolean remove(Object o): 删除指定元素，返回删除是否成功
+        // 注意：若指定元素出现多次，只删除排在第一个的位置
+        System.out.println("--------------------");
+        System.out.println(list.remove("Java"));    // true
+        System.out.println("被删之后的ArrayList：" + list);   // [Mysql, CSS, Javascript]
+
+        // 6. public E set(int index, E element): 修改指定位置的元素，并返回被修改的元素
+        System.out.println("--------------------");
+        System.out.println(list.set(0, "数据库")); // Mysql
+        System.out.println(list);   // [数据库, CSS, Javascript]
+    }
+}
+```
+代码详见：[ArrayListApi](code/src/ArrayList/ArrayListApi.java)
+
+### 9.3 案例
+```aidl
+
+```
 
 ## 10. static
 
