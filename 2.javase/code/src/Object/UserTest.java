@@ -17,6 +17,7 @@ public class UserTest {
         System.out.println(u2.getName());
         System.out.println(u2.getHeight());
         System.out.println(u2.getSalary());
+
     }
 
 

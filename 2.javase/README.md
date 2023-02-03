@@ -94,7 +94,7 @@ byte b = (byte)a;
 / 除
 % 取余
 
-# 加号出了作为算法运算符，还可以当作连接符
+# 加号除了作为算法运算符，还可以当作连接符
 System.out.println("a="+a)
 ```
 
@@ -630,6 +630,11 @@ public class AgeTest {
 ```
 代码详见：[Movie](code/src/Object/MovieTest.java)
 
+### 7.9 总结
+```aidl
+面向对象编程（oop）
+```
+
 ## 8. String
 ### 8.1 创建
 ```aidl
@@ -668,7 +673,10 @@ public class StringConstruct {
         String s3 = new String(chars1);
         String s4 = new String(chars1);
         System.out.println(s3 == s4);   // false
-
+        
+        byte[] byte1 = new byte[]{97, 98, 99, 65, 66, 67};
+        String s5 = new String(byte1);
+        System.out.println(s5);         // abcABC
     }
 }
 ```
@@ -864,7 +872,7 @@ public class StringPhoneNumber {
 ```
 代码详见：[StringPhoneNumber](code/src/String/StringPhoneNumber.java)
 
-## 9. 集合
+## 9. ArrayList
 ### 9.1 概述
 ```aidl
 # 数组定义之后，类型确定，长度固定。
@@ -962,8 +970,99 @@ public static void main(String[] args) {
 
 ### 9.3 案例
 ```aidl
+# 遍历并删除元素值
+public class ArrayListRemove {
+    public static void main(String[] args) {
+        // 1. 方案1
+        ArrayList<Integer> scores = new ArrayList<>();
+        scores.add(98);
+        scores.add(77);
+        scores.add(66);
+        scores.add(89);
+        scores.add(79);
+        scores.add(50);
+        scores.add(100);
 
+        for (int i = 0; i < scores.size(); i++) {
+            System.out.println(scores);
+            System.out.println(scores.size());
+            System.out.println(i);
+            System.out.println("-----------------------");
+            int score = scores.get(i);
+            if (score<80){
+                scores.remove(i);
+                i --;   // 删除一个数据之后，必须退一步
+            }
+        }
+        
+        // 2. 方案2
+        ArrayList<Integer> scores2 = new ArrayList<>();
+        scores2.add(98);
+        scores2.add(77);
+        scores2.add(66);
+        scores2.add(89);
+        scores2.add(79);
+        scores2.add(50);
+        scores2.add(100);
+
+        for (int i = scores2.size()-1; i >= 0; i--) {
+            System.out.println(scores2);
+            System.out.println(scores2.size());
+            System.out.println(i);
+            System.out.println("-----------------------");
+            int score = scores2.get(i);
+            if (score<80){
+                scores2.remove(i);
+            }
+        }
+    }
+}
 ```
+详见代码：[ArrayListRemove](code/src/ArrayList/ArrayListRemove.java)
+
+```aidl
+# ArrayList 存储自定义类型的对象
+# 需求：某影院系统需要在后台存储三部电影，然后依次展示出来。
+public class ArrayListMoviesTest {
+    public static void main(String[] args) {
+        // 1. 定义电影类
+        // 2. 创建三个电影对象
+        ArrayListMovies m1 = new ArrayListMovies("《肖生克的救赎》", 9.7, "罗宾斯");
+        ArrayListMovies m2 = new ArrayListMovies("《霸王别姬》", 9.7, "张国荣");
+        ArrayListMovies m3 = new ArrayListMovies("《阿甘正传》", 9.5, "汤姆·汉克斯");
+
+        // 3. 创建一个电影类型的ArrayList集合，存储三部电影对象
+        ArrayList<ArrayListMovies> movies = new ArrayList<>();
+        movies.add(m1);
+        movies.add(m2);
+        movies.add(m3);
+        System.out.println(movies);
+
+        // 4. 遍历电影类型的集合中每个电影对象，访问它的信息
+        for (int i = 0; i < movies.size(); i++) {
+            ArrayListMovies m = movies.get(i);
+            System.out.println("电影名称：" + m.getName());
+            System.out.println("电影得分：" + m.getScore());
+            System.out.println("电影主演：" + m.getActor());
+            System.out.println("-----------------------");
+        }
+    }
+}
+```
+详见代码：[ArrayListMoviesTest](code/src/ArrayList/ArrayListMoviesTest.java)
+
+```aidl
+# 案例：学生信息系统的数据搜索
+# 需求：
+后台存储如下学生信息并展示，然后提供学号搜索学生信息的功能。
+```
+![学生信息系统](../picture/studentsSystem.png)
+详见代码：[ArrayListStudentTest](code/src/ArrayList/ArrayListStudentTest.java)
+
+```aidl
+# 案例：开发一个ATM系统
+```
+详见代码：[ATM](code/src/ATM/ATMSystem.java)
 
 ## 10. static
 

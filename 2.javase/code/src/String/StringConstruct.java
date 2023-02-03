@@ -11,5 +11,9 @@ public class StringConstruct {
         String s4 = new String(chars1);
         System.out.println(s3 == s4);   // false
 
+        byte[] byte1 = new byte[]{97, 98, 99, 65, 66, 67};
+        String s5 = new String(byte1);
+        System.out.println(s5);         // abcABC
+
     }
 }
