@@ -1,3 +1,6 @@
+## 0. 内容安排
+![plan](../picture/plan.png)
+
 ## 1.基础语法
 ### 1.1 注释
 ```aidl
@@ -1065,9 +1068,454 @@ public class ArrayListMoviesTest {
 详见代码：[ATM](code/src/ATM/ATMSystem.java)
 
 ## 10. static
+### 10.1 成员变量
+```aidl
+static是静态的意思，可以修饰成员变量和成员方法；
+static修饰成员变量表示该成员变量只在内存中存储一份，可以被共享访问、修改。
 
+类名.静态成员变量（推荐）
+对象.静态成员变量（不推荐）
+
+public class User {
+    public static int onlineNumber = 161;
+
+    private String name;
+    private int age;
+
+    public static void main(String[] args) {
+        // 理解static修饰成员变量的作用和访问特点
+        // 1. 类名.静态成员变量
+        System.out.println(User.onlineNumber); // 161
+
+        // 2. 对象名.实例成员变量
+        User u = new User();
+        u.name = "Tom";
+        u.age = 20;
+        System.out.println(u.name);
+        System.out.println(u.age);
+        u.onlineNumber ++;
+        System.out.println(u.onlineNumber); // 162 // 此种方法不推荐
+        System.out.println(User.onlineNumber); // 162
+
+        // 注意：同一个类中静态成员变量的访问可以省略类名
+        System.out.println(onlineNumber); // 162
+    }
+}
+```
+详见代码：[User](code/src/Static/User.java)
+
+### 10.2 成员变量内存机制
+![内存机制](../picture/static_1.png)
+
+### 10.3 成员方法
+```aidl
+成员变量的分类：
+静态成员方法（有static修饰，归属于类），建议用类名访问，也可以用对象访问；
+实例成员方法（无static修饰，归属于对象），只能用对象触发访问。
+
+使用场景：
+（1）如果该方法是以执行一个公共功能为目的，可以声明为静态方法；
+（2）表示对象自己的行为，且方法中需要访问实例成员的，则该方法必须声明为实例方法；
+
+代码：
+public class Student {
+    private String name;
+
+    // 静态成员方法
+    public static int getMax(int age1, int age2){
+        return age1 > age2 ? age1 : age2;
+    }
+
+    public void study(){
+        System.out.println(name + "在好好学习，天天向上。");
+    }
+
+    public static void main(String[] args) {
+        // 1. 类名.静态成员方法
+        System.out.println(Student.getMax(10, 20));
+
+        // 2. 对象名.实例方法
+        Student s = new Student();
+        s.name = "Tom";
+        s.study();
+    }
+}
+```
+详见代码：[Student](code/src/Static/Student.java)
+
+### 10.4 成员方法内存机制
+![static](../picture/static_2.png)
+
+### 10.5 注意事项
+![static](../picture/static_3.png)
+```aidl
+public class Test {
+    // 静态成员
+    public static int onlineNumber = 10;
+    public static void test(){
+        System.out.println("==test==");
+    }
+
+    // 实例成员
+    private String name;
+    public void run(){
+        System.out.println(name + "跑得快");
+    }
+
+    // 1. 静态方法只能访问静态成员，不能直接访问实例成员
+    public static void test1(){
+        // 访问静态成员变量
+        System.out.println(onlineNumber);
+        // 访问静态成员方法
+        Test.test();
+
+        // 但是不能直接访问实例成员变量/方法，需要先创建一个对象，然后访问
+        Test t = new Test();
+        System.out.println(t.name);
+    }
+
+    // 2. 实例方法可以访问静态成员，也可以访问实例成员
+    public void test2(){
+        // 访问静态成员变量
+        System.out.println(onlineNumber);
+        // 访问静态成员方法
+        Test.test();
+
+        // 访问实例成员变量
+        System.out.println(name);
+        // 访问实例成员方法
+        run();
+    }
+
+    // 3. 静态方法中不可以出现this关键字
+    public static void test3(){
+        // System.out.println(this); // this只能代表当前对象，可以放在实例方法中
+    }
+}
+```
+详见代码：[Test](code/src/Static/Test.java)
+
+### 10.6 工具类
+```aidl
+由于工具里面都是静态方法，直接用类名即可访问，因此，工具类无需创建对象，建议将工具类的构造器进行私有。
+
+public class UtilTest {
+    public static void main(String[] args) {
+        Util.createVerifyCode(6);
+    }
+}
+
+public class Util {
+    // 注意：由于工具类无需创建对象，所以把其构造器私有化
+    private Util(){
+    }
+
+    // 静态方法：生成N位验证码
+    public static String createVerifyCode(int n) {
+        // 1. 定义可能出现的字符
+        String data = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        // 2. 循环五次，每次随机生成一个索引，提取对应字符连接起来
+        String code = "";
+        Random r = new Random();
+        for (int i = 0; i < n; i++) {
+            // 随机一个索引
+            int index = r.nextInt(data.length());
+            char c = data.charAt(index);
+            code += c;
+
+        }
+
+        // 3. 输出字符串
+        System.out.println(code);
+
+        // 4. 返回字符串
+        return code;
+    }
+}
+```
+详见代码：[UtilTest](code/src/Static/UtilTest.java)
+
+```aidl
+# 练习：定义数组工具类
+public class ArrayUtilTest {
+    public static void main(String[] args) {
+        int[] arr1 = null;
+        int[] arr2 = {};
+        int[] arr3 = new int[] {12, 13, 14, 15, 16};
+
+        System.out.println(ArrayUtil.toString(arr1));   // null
+        System.out.println(ArrayUtil.toString(arr2));   // []
+        System.out.println(ArrayUtil.toString(arr3));   // [12,13,14,15,16]
+    }
+}
+
+public class ArrayUtil {
+    private ArrayUtil(){
+
+    }
+
+    public static String toString(int[] arr){
+        if(arr == null){
+            return null;
+        }
+
+        String result = "[";
+        for (int i = 0; i < arr.length; i++) {
+            result += (i == arr.length-1 ? arr[i] : arr[i] + ",");
+        }
+        result += "]";
+        return result;
+    }
+}
+```
+详见代码：[ArrayUtilTest](code/src/Static/ArrayUtilTest.java)
+
+### 10.7 代码块
+![代码块](../picture/code.png)
+```aidl
+public class StaticCode {
+    public static String name;
+    private int age;
+
+    // 静态代码块：有static修饰，属于类，与类一起优先加载一次，自动触发执行
+    // 作用：可以用于初始化静态资源
+    static {
+        System.out.println("---静态代码块被执行---");   // 它比main方法先执行
+        name = "Tom";
+        System.out.println(name);
+    }
+
+    // 实例代码块（构造代码块）：无static修饰，每次构造对象时，都会触发一次执行。
+    // 作用：可以初始化实例资源
+    {
+        age = 10;
+        System.out.println("---实例代码块被执行---");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("---main方法被执行---");
+        System.out.println(name);
+
+        StaticCode s1 = new StaticCode();
+        StaticCode s2 = new StaticCode();
+    }
+}
+```
+详见代码：[StaticCode](code/src/Static/StaticCode.java)
+
+```aidl
+# 案例：斗地主游戏，需要提前准备好54张牌
+public class StaticCodeTest {
+    // 1. 定义一个静态的集合，只加载一次
+    public static ArrayList<String> cards = new ArrayList<>();
+
+    // 2. 在程序真正运行main方法前，将54张牌放进去
+    static {
+        // 定义一个数组存放全部点数
+        String[] sizes = new String[]{"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
+        // 定义一个数组存放花色
+        String[] colors = new String[]{"♥", "♦", "♠", "♣"};
+        // 遍历
+        for (int i = 0; i < sizes.length; i++) {
+            for (int j = 0; j < colors.length; j++) {
+                // 形成一张牌
+                String card = sizes[i] + colors[j];
+                cards.add(card);
+            }
+        }
+        // 单独加入大小王
+        cards.add("🃏");
+        cards.add("🃏");
+    }
+
+    public static void main(String[] args) {
+        System.out.println("新牌" + cards);
+    }
+}
+```
+详见代码：[StaticCodeTest](code/src/Static/StaticCodeTest.java)
+
+### 10.8 单例模式
+![designPattern](../picture/designPattern.png)
+![singleInstance](../picture/singleInstance.png)
+![singleInstance1](../picture/singleInstance1.png)
+![singleInstance2](../picture/singleInstance2.png)
+```aidl
+# 饿汉单例
+public class SingleInstance {
+    // 饿汉单例
+    // 1. 必须将构造器私有化
+    private SingleInstance(){}
+
+    // 2. 饿汉单例是在获取对象前，已经准备好了一个对象；这个对象只能是一个，所以定义静态成员变量要记住。
+    public static SingleInstance instance = new SingleInstance();
+
+    public static void main(String[] args) {
+
+    }
+}
+
+public class SingleInstanceTest {
+    public static void main(String[] args) {
+        SingleInstance s1 = SingleInstance.instance;
+        SingleInstance s2 = SingleInstance.instance;
+        System.out.println(s1 == s2);   // true
+    }
+}
+```
+详见代码：[SingleInstanceTest](code/src/Static/SingleInstanceTest.java)
+
+```aidl
+# 懒汉单例
+public class SingleInstance1 {
+    // 使用懒汉单例
+    // 1. 必须将构造器私有化
+    private SingleInstance1(){}
+
+    // 2. 定义一个静态的成员变量，存储一个对象，只加载一次，只有一份。
+    private static SingleInstance1 instance;
+
+    // 3. 提供一个方法，对外返回单例对象。
+    public static SingleInstance1 getInstance(){
+        if (instance==null){
+            instance = new SingleInstance1();
+        }
+        return instance;
+    }
+}
+
+public class SingleInstance1Test {
+    public static void main(String[] args) {
+        SingleInstance1 s1 = SingleInstance1.getInstance();
+        SingleInstance1 s2 = SingleInstance1.getInstance();
+        System.out.println(s1 == s2);   // true
+    }
+}
+```
+详见代码：[SingleInstance1Test](code/src/Static/SingleInstance1Test.java)
 
 ## 11. 继承
+### 11.1 定义
+![extends](../picture/extends.png)
+```aidl
+public class People {
+    public void run(){
+        System.out.println("人会跑");
+    }
+}
+
+public class Student extends People{
+}
+
+public class StudentTest {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.run();
+    }
+}
+```
+详见代码：[StudentTest](code/src/Extends/StudentTest.java)
+
+### 11.2 设计规范
+![extends1](../picture/extends1.png)
+```aidl
+# 案例：教学资源管理系统
+public class People {
+    private String name;
+    private int age;
+
+    // 查看课表
+    public void queryCourse(){
+        System.out.println(name + "在看课表");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void run(){
+        System.out.println("人会跑");
+    }
+}
+
+public class Student extends People{
+    public void writeInfo(){
+        System.out.println(getName() + "在写字。");
+    }
+}
+
+public class StudentTest {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.run();
+
+        // 继承设计思想
+        s.setName("Tom");
+        s.setAge(10);
+        System.out.println(s.getName());
+        System.out.println(s.getAge());
+
+        s.queryCourse();
+        s.writeInfo();
+    }
+}
+```
+
+### 11.3 内存分析
+![extends2](../picture/extends2.png)
+
+### 11.4 继承的特点
 
 
-## 12. 
+## 12. 语法
+
+
+## 13. 抽象类
+
+
+## 14. 接口
+
+
+## 15. 多态
+
+
+## 16. 内部类
+
+
+## 17. 常见API
+
+
+## 18. 包装类
+
+
+## 19. 正则表达式
+
+
+## 20. Arrays
+
+
+## 21. 选择排序
+
+
+## 22. 二分查找
+
+
+## 23. Lambda表达式
+
+
+## 24. 集合
+
+
