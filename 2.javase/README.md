@@ -1473,15 +1473,296 @@ public class StudentTest {
     }
 }
 ```
+详见代码：[StudentTest](code/src/Extends/StudentTest.java)
 
 ### 11.3 内存分析
 ![extends2](../picture/extends2.png)
 
 ### 11.4 继承的特点
+![extends3](../picture/extends3.png)
+详见代码：[Feature](code/src/Extends/Feature.java)
 
+### 11.5 访问成员
+![extends4](../picture/extends4.png)
+
+```aidl
+public class Field {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.showName();
+    }
+}
+
+public class Animal {
+    public String name = "动物名";
+    public void run(){
+        System.out.println("动物可以跑");
+    }
+}
+
+public class Dog extends Animal{
+    public String name = "狗名";
+
+    public void lookDoor(){
+        System.out.println("狗可以看门");
+    }
+
+    public void run(){
+        System.out.println("狗可以跑");
+    }
+
+    public void showName(){
+        String name = "局部名";
+        System.out.println(name);           // 局部名
+        System.out.println(this.name);      // 狗名
+        System.out.println(super.name);     // 动物名
+
+        run();                              // 狗可以跑
+        super.run();                        // 动物可以跑
+    }
+}
+```
+详见代码：[Field](code/src/Extends/Field.java)
+
+### 11.6 方法重写
+![extends5](../picture/extends5.png)
+![extends6](../picture/extends6.png)
+```aidl
+public class Phone {
+    public void call(){
+        System.out.println("打电话");
+    }
+
+    public void sendMsg(){
+        System.out.println("发短信");
+    }
+}
+
+public class NewPhone extends Phone{
+    // 方法重写
+    @Override   // 重写校验注解，加上之后，这个方法必须是正确重写的，这样更安全。
+    public void call(){
+        super.call();
+        System.out.println("视频通话");
+    }
+
+    @Override
+    public void sendMsg(){
+        super.sendMsg();
+        System.out.println("发图片");
+    }
+}
+
+public class NewPhoneTest {
+    public static void main(String[] args) {
+        NewPhone hw = new NewPhone();
+        hw.call();
+        hw.sendMsg();
+    }
+}
+```
+详见代码：[NewPhoneTest](code/src/Extends/NewPhoneTest.java)
+
+### 11.7 子类构造器的特点
+![extends7](../picture/extends7.png)
+```aidl
+public class Constructor {
+    public Constructor(){
+        System.out.println("父类无参构造器被执行");
+    }
+}
+
+public class Constructor1 extends Constructor{
+    public Constructor1() {
+        super();    // 写不写都有，默认找父类的无参数构造器执行
+        System.out.println("子类无参构造器被执行");
+    }
+
+    public Constructor1(String name) {
+        super();    // 写不写都有，默认找父类的无参数构造器执行
+        System.out.println("子类有参构造器被执行");
+    }
+}
+
+public class ConstructorTest {
+    public static void main(String[] args) {
+        Constructor1 constructor1 = new Constructor1();
+        System.out.println(constructor1);
+
+        System.out.println("----------------");
+
+        Constructor1 constructor2 = new Constructor1();
+        System.out.println(constructor2);
+    }
+}
+```
+详见代码：[ConstructorTest](code/src/Extends/ConstructorTest.java)
+
+### 11.8 调用父类有参构造器
+```aidl
+// 父类
+public class People {
+    private String name;
+    private int age;
+
+    // 有参构造器
+    public People(String name, int age){
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+// 子类
+public class Teacher extends People{
+    public Teacher(String name, int age){
+        // 调用父类的有参构造器，初始化继承来自父类的数据
+        super(name, age);
+    }
+}
+
+public class Test{
+    public static void main(String[] args){
+        Teacher t = new Teacher("Tom", 20);
+        System.out.println(t.getName());
+        System.out.println(t.getAge());
+    }
+}
+```
+
+### 11.9 this和super对比
+![this&super](../picture/extends8.png)
+```aidl
+public class This {
+    private String name;
+    private String schoolName;
+
+    public This() {
+    }
+
+    // 如果不填schoolName，则此变量使用默认变量
+    public This(String name){
+        this(name, "SZU");
+    }
+
+    public This(String name, String schoolName) {
+        this.name = name;
+        this.schoolName = schoolName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+}
+
+public class ThisTest {
+    public static void main(String[] args) {
+        This s1 = new This("Tom", "HKU");
+        System.out.println(s1.getName());
+        System.out.println(s1.getSchoolName());
+
+        // 如果不填写schoolName，则默认是SZU
+        This s2 = new This("Jack");
+        System.out.println(s2.getName());
+        System.out.println(s2.getSchoolName());
+    }
+}
+```
+详见代码：[ThisTest](code/src/Extends/ThisTest.java)
 
 ## 12. 语法
+### 12.1 包
+![package](../picture/package.png)
 
+详见代码：[Package](code/src/Package/Test.java)
+
+### 12.2 权限修饰符
+![modifier](../picture/modifier.png)
+![modifier1](../picture/modifier1.png)
+
+详见代码：[Test](code/src/Modifier/Fu.java)
+
+### 12.3 final
+![final](../picture/final.png)
+
+详见代码：[Test](code/src/Final/Test.java)
+
+### 12.4 常量
+![constant](../picture/constant.png)
+
+详见代码：[ConstantDemo1](code/src/Constant/ConstantDemo1.java)
+
+![constant1](../picture/constant1.png)
+
+详见代码：[ConstantDemo2](code/src/Constant/ConstantDemo2.java)
+
+### 12.5 枚举
+![enum](../picture/enum.png)
+![enum1](../picture/enum1.png)
+![enum2](../picture/enum2.png)
+
+详见代码：[EnumDemo](code/src/Enum/EnumDemo.java)
+
+### 12.6 抽象类
+![Abstract](../picture/Abstract.png)
+![Abstract1](../picture/Abstract1.png)
+
+详见代码：[Test](code/src/Abstract/Test.java)
+
+案例：
+
+![Abstract2](../picture/Abstract2.png)
+
+详见代码：[Demo1](code/src/Abstract/Demo1)
+
+![Abstract3](../picture/Abstract3.png)
+![Abstract4](../picture/Abstract4.png)
+
+模板方法模式：
+
+![Abstract5](../picture/Abstract5.png)
+![Abstract6](../picture/Abstract6.png)
+
+详见代码：[Demo2](code/src/Abstract/Demo2)
+
+
+### 12.7 接口
+#### 接口概述、特点
+
+#### 接口的基本使用：被实现
+
+#### 接口与接口的关系：多继承
+
+#### JDK8开始接口新增方法
+
+#### 使用接口的注意事项
 
 ## 13. 抽象类
 
