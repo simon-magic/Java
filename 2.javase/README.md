@@ -1793,17 +1793,41 @@ public class ThisTest {
 ### 13.1 多态的概述，多态的形式
 ![polymorphic](../picture/polymorphic.png)
 
-详见代码：[Demo](code/src/Polymorphic/Demo1)
+详见代码：[Demo1](code/src/Polymorphic/Demo1)
 
 ### 13.2 多态的优势
 ![polymorphic1](../picture/polymorphic1.png)
 
 ### 13.3 多态下引用数据类型的类型转换
+![polymorphic2](../picture/polymorphic2.png)
 
+详见代码：[Demo2](code/src/Polymorphic/Demo2)
 
 ### 13.4 多态的综合案例
+![polymorphic3](../picture/polymorphic3.png)
+
+详见代码：[Demo3](code/src/Polymorphic/Demo3)
+
+## 14. 内部类
+### 14.1 概述
+![internalClass](../picture/internalClass.png)
+
+### 14.2 静态内部类
 
 
+### 14.3 成员内部类
+
+
+### 14.4 局部内部类
+
+
+### 14.5 匿名内部类概述
+
+
+### 14.6 匿名内部类常见使用形式
+
+
+### 14.7 匿名内部类使用场景
 
 
 
