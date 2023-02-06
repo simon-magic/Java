@@ -1338,8 +1338,11 @@ public class StaticCodeTest {
 
 ### 10.8 单例模式
 ![designPattern](../picture/designPattern.png)
+
 ![singleInstance](../picture/singleInstance.png)
+
 ![singleInstance1](../picture/singleInstance1.png)
+
 ![singleInstance2](../picture/singleInstance2.png)
 ```aidl
 # 饿汉单例
@@ -1526,6 +1529,7 @@ public class Dog extends Animal{
 
 ### 11.6 方法重写
 ![extends5](../picture/extends5.png)
+
 ![extends6](../picture/extends6.png)
 ```aidl
 public class Phone {
@@ -1705,6 +1709,7 @@ public class ThisTest {
 
 ### 12.2 权限修饰符
 ![modifier](../picture/modifier.png)
+
 ![modifier1](../picture/modifier1.png)
 
 详见代码：[Test](code/src/Modifier/Fu.java)
@@ -1725,13 +1730,16 @@ public class ThisTest {
 
 ### 12.5 枚举
 ![enum](../picture/enum.png)
+
 ![enum1](../picture/enum1.png)
+
 ![enum2](../picture/enum2.png)
 
 详见代码：[EnumDemo](code/src/Enum/EnumDemo.java)
 
 ### 12.6 抽象类
 ![Abstract](../picture/Abstract.png)
+
 ![Abstract1](../picture/Abstract1.png)
 
 详见代码：[Test](code/src/Abstract/Test.java)
@@ -1743,11 +1751,13 @@ public class ThisTest {
 详见代码：[Demo1](code/src/Abstract/Demo1)
 
 ![Abstract3](../picture/Abstract3.png)
+
 ![Abstract4](../picture/Abstract4.png)
 
 模板方法模式：
 
 ![Abstract5](../picture/Abstract5.png)
+
 ![Abstract6](../picture/Abstract6.png)
 
 详见代码：[Demo2](code/src/Abstract/Demo2)
@@ -1755,14 +1765,46 @@ public class ThisTest {
 
 ### 12.7 接口
 #### 接口概述、特点
+![interface](../picture/interface.png)
+
+详见代码：[InterfaceDemo](code/src/Interface/InterfaceDemo.java)
 
 #### 接口的基本使用：被实现
+![interface1](../picture/interface1.png)
+
+详见代码：[Implements](code/src/Interface/Implements)
 
 #### 接口与接口的关系：多继承
+![interface2](../picture/interface2.png)
+
+详见代码：[Extends](code/src/Interface/Extends)
 
 #### JDK8开始接口新增方法
+![interface3](../picture/interface3.png)
+
+详见代码：[JDK8](code/src/Interface/JDK8)
 
 #### 使用接口的注意事项
+![interface4](../picture/interface4.png)
+
+详见代码：[Attention](code/src/Interface/Attention)
+
+## 13. 多态
+### 13.1 多态的概述，多态的形式
+![polymorphic](../picture/polymorphic.png)
+
+详见代码：[Demo](code/src/Polymorphic/Demo1)
+
+### 13.2 多态的优势
+![polymorphic1](../picture/polymorphic1.png)
+
+### 13.3 多态下引用数据类型的类型转换
+
+
+### 13.4 多态的综合案例
+
+
+
 
 
 
