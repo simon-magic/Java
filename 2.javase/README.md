@@ -3,7 +3,7 @@
 
 ## 1.基础语法
 ### 1.1 注释
-```aidl
+```java
 # 单行注释
 // 注释内容，只能写一行
 
@@ -21,7 +21,7 @@
 ```
 
 ### 1.2 字面量
-```aidl
+```java
 # 概念：字面量就是告诉程序员，数据在程序中的书写格式。
 
 # 变量：存储一个数据的内存区域，存储的数据可以变化。
@@ -55,7 +55,7 @@ class, break, if, while等
 
 ## 2. 类型转换
 ### 2.1 自动类型转换
-```aidl
+```java
 # 类型范围小的变量，可以直接赋值给类型范围大的变量。
 # byte --> short --> int --> long --> float --> double
 #          char  --> int
@@ -68,7 +68,7 @@ System.out.println(d); //97
 ```
 
 ### 2.2 表达式中类型转换
-```aidl
+```java
 # 在表达式中，表达式的最终结果类型由表达式中的最高类型决定；
 # 在表达式中，byte，short，char是直接转换为int类型参与运算。
 byte a = 1;
@@ -79,7 +79,7 @@ System.out.println(d);  // 100
 ```
 
 ### 2.3 强制类型转换
-```aidl
+```java
 # 类型大范围的数据，不能直接赋值给类型小范围的数据。
 # 可以使用这种方法强制转换：
     数据类型 变量2 = (数据类型)变量1；
@@ -90,7 +90,7 @@ byte b = (byte)a;
 
 ## 3. 运算符
 ### 3.1 算术运算符
-```aidl
+```java
 + 加
 - 减
 * 乘
@@ -102,13 +102,13 @@ System.out.println("a="+a)
 ```
 
 ### 3.2 自增自减运算符
-```aidl
+```java
 ++ 自增
 -- 自减
 ```
 
 ### 3.3 赋值运算符
-```aidl
+```java
 +=  加后赋值
 -=  减后赋值
 *=  乘后赋值
@@ -117,7 +117,7 @@ System.out.println("a="+a)
 ```
 
 ### 3.4 关系运算符
-```aidl
+```java
 ==  判断是否相等
 !=  判断是否不等
 >   判断是否大于
@@ -127,7 +127,7 @@ System.out.println("a="+a)
 ```
 
 ### 3.5 逻辑运算符
-```aidl
+```java
 &   逻辑与
 |   逻辑或
 !   逻辑非
@@ -138,7 +138,7 @@ System.out.println("a="+a)
 ```
 
 ### 3.6 三元运算符
-```aidl
+```java
 # 条件表达式 ? 值1 : 值2
 # 首先判断条件表达式，如果是true，则返回值1，否则返回值2.
 
@@ -157,7 +157,7 @@ System.out.println(max)
 ```
 
 ### 3.7 运算符优先级
-```aidl
+```java
 优先级     运算符
 1           ()
 2           ! ~ ++ 
@@ -169,7 +169,7 @@ System.out.println(max)
 
 ## 4. 分支结构
 ### 4.1 if
-```aidl
+```java
 # if格式：
 if(条件表达式){
     语句体；
@@ -191,7 +191,7 @@ if(条件表达式1){
 ```
 
 ### 4.2 switch
-```aidl
+```java
 # switch格式：
 switch(表达式){
     case 值1：
@@ -212,7 +212,7 @@ switch(表达式){
 ```
 
 ### 4.3 for
-```aidl
+```java
 # for格式：
 for (int i=0; i<10; i++){
     System.out.println(i)
@@ -237,7 +237,7 @@ for (int i=100; i<=999; i++){
 ```
 
 ### 4.4 while
-```aidl
+```java
 # 格式：
 int i = 0;
 while (i<10){
@@ -249,7 +249,7 @@ while (i<10){
 ```
 
 ### 4.5 do while
-```aidl
+```java
 # 格式：
 int i = 0;
 do{
@@ -261,7 +261,7 @@ do{
 ```
 
 ### 4.6 死循环
-```aidl
+```java
 # 格式1：
 for(;;){
     循环体；
@@ -279,7 +279,7 @@ do{
 ```
 
 ### 4.7 跳出控制语句
-```aidl
+```java
 # break：跳出并结束当前所在循环；
 # continue：跳出本次循环，进入下一次循环。
 
@@ -288,7 +288,7 @@ do{
 ```
 
 ### 4.8 案例：随机数Random类
-```aidl
+```java
 # 使用方法：
 Random r = new Random();
 int data = r.nextInt(10);
@@ -314,7 +314,7 @@ while(true){
 
 ## 5. 数组
 ### 5.1 数组定义
-```aidl
+```java
 # 静态初始化数组
 // 完整格式：
 数组类型[] 数组名 = new 数据类型[]{元素1，元素2，元素3...};
@@ -346,7 +346,7 @@ boolean                     false
 ```
 
 ### 5.2 数组遍历
-```aidl
+```java
 int[] ages = new int[]{10, 20, 30, 40};
 for (i=0; i<ages.length; i++){
     System.out.println(ages[i]);
@@ -354,7 +354,7 @@ for (i=0; i<ages.length; i++){
 
 ```
 ### 5.3 案例分析
-```aidl
+```java
 # 例子1：数组求和
 int[] money = new int[]{100, 200, 300, 400};
 int sum = 0;
@@ -374,14 +374,14 @@ for (i=1; i<money.length; i++){
 ```
 
 ### 5.4 内存分析
-```aidl
+```java
 int[] money = new int[]{100, 200, 300, 400};
 # 注意：money 存放的是 数组的地址
 ```
 
 ## 6. 方法
 ### 6.1 定义
-```aidl
+```java
 # 定义格式：
 修饰符 返回值类型 方法名(形参列表){
     方法体代码（需要执行的功能代码）;
@@ -405,7 +405,7 @@ public static void print(){
 ```
 
 ### 6.2 案例
-```aidl
+```java
 # 案例1：定义一个方法，返回计算1-n的和。
 public static int sum(int n){
     int sum = 0;
@@ -437,7 +437,7 @@ public static int maxArr(int[] a){
 ```
 
 ### 6.3 参数传递
-```aidl
+```java
 # 基本数据类型参数传递
 传递实参给形参的时候，传递的是实参中的值，也就是值传递。
 public static void main(String[] args){
@@ -468,7 +468,7 @@ public static void change(int[] arr){
 ```
 
 ### 6.4 方法重载
-```aidl
+```java
 # 定义：同一个类中，出现多个方法名称相同，但是形参列表不同，这些方法就是重载方法。
 public class Method{
     public static void main(String[] args){
@@ -489,7 +489,7 @@ public class Method{
 ```
 
 ### 6.5 单独使用return关键词
-```aidl
+```java
 public class Test{
     public static void main(String[] args){
         chu(1, 10);
@@ -507,7 +507,7 @@ public class Test{
 
 ## 7. 对象
 ### 7.1 创建
-```aidl
+```java
 # 创建类
 public class 类名{
     1. 成员变量（代表属性，一般是名词）
@@ -541,7 +541,7 @@ Car c = new Car();
 代码详见：[Object](code/src/Object/Shopping.java)
 
 ### 7.3 构造器
-```aidl
+```java
 # 作用：定义在类中，可以初始化一个类的对象，并返回对象的地址。
 # 格式：
 修饰符 类名(形参列表){
@@ -565,7 +565,7 @@ car c2 = new car("奔驰", 39.8);
 代码详见：[CarTest](code/src/Object/CarTest.java)
 
 ### 7.4 this
-```aidl
+```java
 # 作用：可以用于指定访问当前对象的成员变量、成员方法。
 public class Car {
     String name;
@@ -583,7 +583,7 @@ public class Car {
 代码详见：[Car](code/src/Object/Car.java)
 
 ### 7.5 封装
-```aidl
+```java
 # 原则：对象代表什么，就得封装对应的数据，并提供数据对应的行为。
 public class Age {
     private int age;
@@ -611,7 +611,7 @@ public class AgeTest {
 代码详见：[age](code/src/Object/AgeTest.java)
 
 ### 7.6 JavaBean
-```aidl
+```java
 # 书写要求：
 1. 成员变量使用private修饰；
 2. 提供成员变量对应的setXxx() / getXxx()方法；
@@ -628,19 +628,19 @@ public class AgeTest {
 | 作用域  |        全对象内        |        所属方法内         |
 
 ### 7.8 案例
-```aidl
+```java
 # 案例：模仿电影信息展示。
 ```
 代码详见：[Movie](code/src/Object/MovieTest.java)
 
 ### 7.9 总结
-```aidl
+```java
 面向对象编程（oop）
 ```
 
 ## 8. String
 ### 8.1 创建
-```aidl
+```java
 # 概述：java.lang.String类代表字符串，String类定义的对象用于指向字符串对象，然后操作该字符串。
 # 特点：String类创建之后不能被修改。
 
@@ -663,7 +663,7 @@ System.out.println(address);    // 深圳大学计算机与软件学院
 | public String(String original) |   传入字符串内容（几乎不用）   |
 | public String(char[] chs) | 根据字符数组的内容，创建字符串对象 |
 | public String(byte[] chs) | 根据字节数组的内容，创建字符串对象 |
-```aidl
+```java
 # 以""方式给出的字符串对象，在字符串常量池中存储，相同的内容只会存储一份。
 # 通过构造器new对象，则每new一次就会产生一个新对象，放在堆内存中。
 public class StringConstruct {
@@ -687,7 +687,7 @@ public class StringConstruct {
 
 
 ### 8.2 常见面试题
-```aidl
+```java
 # 代码运行结果：
 public class InterviewQuestion {
     public static void main(String[] args) {
@@ -710,7 +710,7 @@ public class InterviewQuestion {
 详见代码：[InterviewQuestion](code/src/String/InterviewQuestion.java)
 
 ### 8.3 String常见API
-```aidl
+```java
 # 案例1：字符串的内容比较，推荐使用String类提供的“equals”方法。
 ## equals: 只关心字符内容是否一致；
 ## equalsIgnoreCase: 忽略大小写。
@@ -748,7 +748,7 @@ System.out.println(sysCode.equalsIgnoreCase(code1));
 ```
 代码详见：[StringEquals](code/src/String/StringEquals.java)
 
-```aidl
+```java
 案例2：其他例子
 // 1. length: 字符串长度
 System.out.println("--------------------");
@@ -804,7 +804,7 @@ for (int i = 0; i < name5.length; i++) {
 ```
 
 ### 8.4 案例
-```aidl
+```java
 # 开发验证码功能
 public class StringSys {
     public static void main(String[] args) {
@@ -828,7 +828,7 @@ public class StringSys {
 }
 ```
 代码详见：[StringSys](code/src/String/StringSys.java)
-```aidl
+```java
 # 模拟用户登录功能，最多只给三次机会。
 public class StringUser {
     public static void main(String[] args) {
@@ -856,7 +856,7 @@ public class StringUser {
 }
 ```
 代码详见：[StringUser](code/src/String/StringUser.java)
-```aidl
+```java
 # 电话号码屏蔽：中间四位变成*
 public class StringPhoneNumber {
     public static void main(String[] args) {
@@ -877,7 +877,7 @@ public class StringPhoneNumber {
 
 ## 9. ArrayList
 ### 9.1 概述
-```aidl
+```java
 # 数组定义之后，类型确定，长度固定。
 # 集合的大小不固定，启动后可以动态变化，类型也可以选择不固定。
 # 集合非常适合做元素不确定，且要进行增删操作的场景。
@@ -885,7 +885,7 @@ public class StringPhoneNumber {
 ```
 
 ### 9.2 使用方法
-```aidl
+```java
 # 添加数据 add(int index, E element);   add(E element);
 public class ArrayListConstruct {
     public static void main(String[] args) {
@@ -905,7 +905,7 @@ public class ArrayListConstruct {
 ```
 代码详见：[ArrayListConstruct](code/src/ArrayList/ArrayListConstruct.java)
 
-```aidl
+```java
 # 泛型：ArrayList<E>，集合只能操作某种数据类型。
 ArrayList<String>: 只能操作字符串类型的数据；
 ArrayList<Interger>: 只能操作整数类型的数据。
@@ -925,7 +925,7 @@ public class ArrayListGeneric {
 ```
 代码详见：[ArrayListGeneric](code/src/ArrayList/ArrayListGeneric.java)
 
-```aidl
+```java
 # 常用API
 public static void main(String[] args) {
         ArrayList<String> list = new ArrayList<>();
@@ -972,7 +972,7 @@ public static void main(String[] args) {
 代码详见：[ArrayListApi](code/src/ArrayList/ArrayListApi.java)
 
 ### 9.3 案例
-```aidl
+```java
 # 遍历并删除元素值
 public class ArrayListRemove {
     public static void main(String[] args) {
@@ -1023,7 +1023,7 @@ public class ArrayListRemove {
 ```
 详见代码：[ArrayListRemove](code/src/ArrayList/ArrayListRemove.java)
 
-```aidl
+```java
 # ArrayList 存储自定义类型的对象
 # 需求：某影院系统需要在后台存储三部电影，然后依次展示出来。
 public class ArrayListMoviesTest {
@@ -1054,7 +1054,7 @@ public class ArrayListMoviesTest {
 ```
 详见代码：[ArrayListMoviesTest](code/src/ArrayList/ArrayListMoviesTest.java)
 
-```aidl
+```java
 # 案例：学生信息系统的数据搜索
 # 需求：
 后台存储如下学生信息并展示，然后提供学号搜索学生信息的功能。
@@ -1062,14 +1062,14 @@ public class ArrayListMoviesTest {
 ![学生信息系统](../picture/studentsSystem.png)
 详见代码：[ArrayListStudentTest](code/src/ArrayList/ArrayListStudentTest.java)
 
-```aidl
+```java
 # 案例：开发一个ATM系统
 ```
 详见代码：[ATM](code/src/ATM/ATMSystem.java)
 
 ## 10. static
 ### 10.1 成员变量
-```aidl
+```java
 static是静态的意思，可以修饰成员变量和成员方法；
 static修饰成员变量表示该成员变量只在内存中存储一份，可以被共享访问、修改。
 
@@ -1108,7 +1108,7 @@ public class User {
 ![内存机制](../picture/static_1.png)
 
 ### 10.3 成员方法
-```aidl
+```java
 成员变量的分类：
 静态成员方法（有static修饰，归属于类），建议用类名访问，也可以用对象访问；
 实例成员方法（无static修饰，归属于对象），只能用对象触发访问。
@@ -1148,7 +1148,7 @@ public class Student {
 
 ### 10.5 注意事项
 ![static](../picture/static_3.png)
-```aidl
+```java
 public class Test {
     // 静态成员
     public static int onlineNumber = 10;
@@ -1196,7 +1196,7 @@ public class Test {
 详见代码：[Test](code/src/Static/Test.java)
 
 ### 10.6 工具类
-```aidl
+```java
 由于工具里面都是静态方法，直接用类名即可访问，因此，工具类无需创建对象，建议将工具类的构造器进行私有。
 
 public class UtilTest {
@@ -1236,7 +1236,7 @@ public class Util {
 ```
 详见代码：[UtilTest](code/src/Static/UtilTest.java)
 
-```aidl
+```java
 # 练习：定义数组工具类
 public class ArrayUtilTest {
     public static void main(String[] args) {
@@ -1273,7 +1273,7 @@ public class ArrayUtil {
 
 ### 10.7 代码块
 ![代码块](../picture/code.png)
-```aidl
+```java
 public class StaticCode {
     public static String name;
     private int age;
@@ -1304,7 +1304,7 @@ public class StaticCode {
 ```
 详见代码：[StaticCode](code/src/Static/StaticCode.java)
 
-```aidl
+```java
 # 案例：斗地主游戏，需要提前准备好54张牌
 public class StaticCodeTest {
     // 1. 定义一个静态的集合，只加载一次
@@ -1344,7 +1344,7 @@ public class StaticCodeTest {
 ![singleInstance1](../picture/singleInstance1.png)
 
 ![singleInstance2](../picture/singleInstance2.png)
-```aidl
+```java
 # 饿汉单例
 public class SingleInstance {
     // 饿汉单例
@@ -1369,7 +1369,7 @@ public class SingleInstanceTest {
 ```
 详见代码：[SingleInstanceTest](code/src/Static/SingleInstanceTest.java)
 
-```aidl
+```java
 # 懒汉单例
 public class SingleInstance1 {
     // 使用懒汉单例
@@ -1401,7 +1401,7 @@ public class SingleInstance1Test {
 ## 11. 继承
 ### 11.1 定义
 ![extends](../picture/extends.png)
-```aidl
+```java
 public class People {
     public void run(){
         System.out.println("人会跑");
@@ -1422,7 +1422,7 @@ public class StudentTest {
 
 ### 11.2 设计规范
 ![extends1](../picture/extends1.png)
-```aidl
+```java
 # 案例：教学资源管理系统
 public class People {
     private String name;
@@ -1488,7 +1488,7 @@ public class StudentTest {
 ### 11.5 访问成员
 ![extends4](../picture/extends4.png)
 
-```aidl
+```java
 public class Field {
     public static void main(String[] args) {
         Dog d = new Dog();
@@ -1531,7 +1531,7 @@ public class Dog extends Animal{
 ![extends5](../picture/extends5.png)
 
 ![extends6](../picture/extends6.png)
-```aidl
+```java
 public class Phone {
     public void call(){
         System.out.println("打电话");
@@ -1569,7 +1569,7 @@ public class NewPhoneTest {
 
 ### 11.7 子类构造器的特点
 ![extends7](../picture/extends7.png)
-```aidl
+```java
 public class Constructor {
     public Constructor(){
         System.out.println("父类无参构造器被执行");
@@ -1603,7 +1603,7 @@ public class ConstructorTest {
 详见代码：[ConstructorTest](code/src/Extends/ConstructorTest.java)
 
 ### 11.8 调用父类有参构造器
-```aidl
+```java
 // 父类
 public class People {
     private String name;
@@ -1651,7 +1651,7 @@ public class Test{
 
 ### 11.9 this和super对比
 ![this&super](../picture/extends8.png)
-```aidl
+```java
 public class This {
     private String name;
     private String schoolName;

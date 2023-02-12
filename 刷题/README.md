@@ -1,7 +1,7 @@
 ## 1. LeetCode刷题常用数据结构
 ### 1.1 数组 []
 **初始化**
-```aidl
+```java
 // 初始化一个大小为10，默认值为0的数组
 int[] nums = new int[10];
 
@@ -9,7 +9,7 @@ int[] nums = new int[10];
 boolean[][] visited = new boolean[5][10];
 ```
 **常用方法**
-```aidl
+```java
 // 函数开头一般要做一个非空检查，然后用索引下标访问元素
 if (nums.length == 0) {
     return;
@@ -22,18 +22,18 @@ for (int i = 0; i < nums.length; i++) {
 
 ### 1.2 字符串 String
 **初始化**
-```aidl
+```java
 String s1 = "hello world";
 ```
 
 **访问字符串**
-```aidl
+```java
 // String不支持用[]直接访问字符
 char c = s1.charAt(2);
 ```
 
 **修改字符串**
-```aidl
+```java
 // String不支持直接修改字符串，要转化为char[]类型才能修改
 char[] chars = s1.toCharArray();
 chars[1] = 'a';
@@ -41,7 +41,7 @@ String s2 = new String(chars);
 ```
 
 **判断字符串是否相同**
-```aidl
+```java
 // 一定要用equals方法进行判断，不能直接用==
 if (s1.equals(s2)) {
     // 相等
@@ -51,13 +51,13 @@ if (s1.equals(s2)) {
 ```
 
 **拼接字符串**
-```aidl
+```java
 // 支持直接用+进行连接，但是效率不高
 String s3 = s1 + "!";
 ```
 
 **通过 STRINGBUILDER 进行频繁的字符串拼接以提高效率**
-```aidl
+```java
 StringBuilder sb = new StringBuilder();
 
 for (char c = 'a'; c <= 'f'; c++) {
@@ -69,7 +69,7 @@ for (char c = 'a'; c <= 'f'; c++) {
 
 ### 1.3 动态数组 ArrayList
 **初始化**
-```aidl
+```java
 // 初始化一个存储String类型的动态数组
 ArrayList<String> strings = new ArrayList<>();
 
@@ -78,7 +78,7 @@ ArrayList<Integer> nums = new ArrayList<>();
 ```
 
 **常用方法**
-```aidl
+```java
 // 判断是否为空
 boolean isEmpty()
 
@@ -94,7 +94,7 @@ boolean add(E e)
 
 ### 1.4 双链表 LinkedList
 **初始化**
-```aidl
+```java
 // 初始化一个存储String类型的双链表
 LinkedList<String> strings = new LinkedList<>();
 
@@ -103,7 +103,7 @@ LinkedList<Integer> nums = new LinkedList<>();
 ```
 
 **常用方法**
-```aidl
+```java
 // 判断是否为空
 boolean isEmpty()
 
@@ -125,7 +125,7 @@ E removeFirst()
 
 ### 1.5 哈希表 HashMap
 **初始化**
-```aidl
+```java
 // 初始化一个整数映射到字符串的哈希表
 HashMap<Integer, String> map = new HashMap<>();
 
@@ -134,7 +134,7 @@ HashMap<String, int[]> map = new HashMap<>();
 ```
 
 **常用方法**
-```aidl
+```java
 // 判断是否存在Key
 boolean containsKey(Object key)
 
@@ -159,14 +159,14 @@ Set<K> keySet()
 
 ### 1.6 队列 Queue
 **初始化**
-```aidl
+```java
 // Java中的Queue是一个接口
 // 初始化一个存储String的队列
 Queue<String> q = new LinkedList<>();
 ```
 
 **常用方法**
-```aidl
+```java
 // 判断是否为空
 boolean isEmpty()
 
@@ -185,12 +185,12 @@ boolean offer(E e)
 
 ### 1.7 堆栈 Stack
 **初始化**
-```aidl
+```java
 // 初始化一个int类型的堆栈
 Stack<Integer> s = new Stack<>();
 ```
 **常用方法**
-```aidl
+```java
 // 判断是否为空
 boolean isEmpty()
 
